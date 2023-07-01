@@ -79,6 +79,14 @@ namespace Api_Intro.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<Country>>> SearchCountries(string countryName)
+        {
+            var countries = await _context.Countries.Where(c => c.Name.Contains(countryName)).ToListAsync();
+
+            return Ok(countries);
+        }
     }
 }
 
